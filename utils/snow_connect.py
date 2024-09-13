@@ -2,7 +2,6 @@ from typing import Any, Dict
 
 import streamlit as st
 from snowflake.snowpark.session import Session
-from snowflake.snowpark.version import VERSION
 
 
 class SnowflakeConnection:
@@ -30,13 +29,15 @@ class SnowflakeConnection:
     @staticmethod
     def _get_connection_parameters_from_env() -> Dict[str, Any]:
         connection_parameters = {
+            "host": st.secrets["HOST"],
             "account": st.secrets["ACCOUNT"],
             "user": st.secrets["USER_NAME"],
             "password": st.secrets["PASSWORD"],
-            "warehouse": st.secrets["WAREHOUSE"],
             "database": st.secrets["DATABASE"],
-            "schema": st.secrets["SCHEMA"],
+            "warehouse": st.secrets["WAREHOUSE"],
             "role": st.secrets["ROLE"],
+            "authenticator": st.secrets["AUTHENTICATOR"],
+            "token": st.secrets["TOKEN"],
         }
         return connection_parameters
 
