@@ -1,5 +1,4 @@
 from typing import Any, Dict
-
 import streamlit as st
 from snowflake.snowpark.session import Session
 
@@ -19,7 +18,8 @@ class SnowflakeConnection:
     -------
     get_session()
         Establishes and returns the Snowflake connection session.
-
+    read_oauth_token()
+        Reads the OAuth token from the specified path.
     """
 
     def __init__(self):
@@ -37,9 +37,20 @@ class SnowflakeConnection:
             "warehouse": st.secrets["WAREHOUSE"],
             "role": st.secrets["ROLE"],
             "authenticator": st.secrets["AUTHENTICATOR"],
-            "token": st.secrets["TOKEN"],
+            "token": SnowflakeConnection.read_oauth_token(),  # Use the new method here
         }
         return connection_parameters
+
+    @staticmethod
+    def read_oauth_token() -> str:
+        """
+        Reads the OAuth token from the specified path.
+
+        Returns:
+            str: The OAuth token.
+        """
+        with open('/snowflake/session/token', 'r') as token_file:
+            return token_file.read().strip()
 
     def get_session(self):
         """
