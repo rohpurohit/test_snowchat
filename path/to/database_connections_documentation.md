@@ -4,10 +4,8 @@
 
 1. **Supabase**
    - **File**: `ingest.py`
-     - **Description**: Connects to Supabase to create a vector store for document processing.
+     - Description: Connects to Supabase to store and retrieve vector embeddings.
    - **File**: `chain.py`
-     - **Description**: Establishes a connection to Supabase to retrieve documents and manage embeddings.
+     - Description: Connects to Supabase to retrieve documents for processing.
 
-## Notes
-- No changes have been made to the existing connections.
-- Ensure to notify users about these connections for compliance and security purposes.
+Please notify users about these external connections.
