@@ -47,8 +47,13 @@ class SnowflakeConnection:
         Returns:
             str: The OAuth token.
         """
-        with open('/snowflake/session/token', 'r') as token_file:
-            return token_file.read().strip()
+        try:
+            with open('/snowflake/session/token', 'r') as token_file:
+                return token_file.read().strip()
+        except FileNotFoundError:
+            raise FileNotFoundError("OAuth token file not found. Please check the path.")
+        except Exception as e:
+            raise Exception(f"An error occurred while reading the OAuth token: {str(e)}")
 
     def get_session(self):
         """
