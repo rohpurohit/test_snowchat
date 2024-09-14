@@ -31,13 +31,11 @@ class SnowflakeConnection:
         connection_parameters = {
             "host": st.secrets["HOST"],
             "account": st.secrets["ACCOUNT"],
-            "user": st.secrets["USER_NAME"],
-            "password": st.secrets["PASSWORD"],
             "database": st.secrets["DATABASE"],
             "warehouse": st.secrets["WAREHOUSE"],
             "role": st.secrets["ROLE"],
-            "authenticator": st.secrets["AUTHENTICATOR"],
-            "token": SnowflakeConnection.read_oauth_token(),  # Use the new method here
+            "authenticator": "oauth",
+            "token": SnowflakeConnection.read_oauth_token(),
         }
         return connection_parameters
 
