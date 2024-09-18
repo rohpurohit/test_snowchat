@@ -1,8 +1,6 @@
 from typing import Any, Dict
-
 import streamlit as st
 from snowflake.snowpark.session import Session
-from snowflake.snowpark.version import VERSION
 
 
 class SnowflakeConnection:
@@ -20,7 +18,8 @@ class SnowflakeConnection:
     -------
     get_session()
         Establishes and returns the Snowflake connection session.
-
+    read_oauth_token()
+        Reads the OAuth token from the specified path.
     """
 
     def __init__(self):
@@ -30,15 +29,31 @@ class SnowflakeConnection:
     @staticmethod
     def _get_connection_parameters_from_env() -> Dict[str, Any]:
         connection_parameters = {
+            "host": st.secrets["HOST"],
             "account": st.secrets["ACCOUNT"],
-            "user": st.secrets["USER_NAME"],
-            "password": st.secrets["PASSWORD"],
-            "warehouse": st.secrets["WAREHOUSE"],
             "database": st.secrets["DATABASE"],
-            "schema": st.secrets["SCHEMA"],
+            "warehouse": st.secrets["WAREHOUSE"],
             "role": st.secrets["ROLE"],
+            "authenticator": "oauth",
+            "token": SnowflakeConnection.read_oauth_token(),
         }
         return connection_parameters
+
+    @staticmethod
+    def read_oauth_token() -> str:
+        """
+        Reads the OAuth token from the specified path.
+
+        Returns:
+            str: The OAuth token.
+        """
+        try:
+            with open('/snowflake/session/token', 'r') as token_file:
+                return token_file.read().strip()
+        except FileNotFoundError:
+            raise FileNotFoundError("OAuth token file not found. Please check the path.")
+        except Exception as e:
+            raise Exception(f"An error occurred while reading the OAuth token: {str(e)}")
 
     def get_session(self):
         """

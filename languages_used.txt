@@ -1,0 +1,7 @@
+# Languages used in the repository
+
+1. Python (.py)
+2. Markdown (.md)
+3. SQL (.sql)
+4. HTML (used in Streamlit)
+5. JavaScript (inferred)
