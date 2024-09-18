@@ -6,9 +6,9 @@ from snowflake.snowpark.exceptions import SnowparkSQLException
 
 from chain import load_chain
 
-# from utils.snow_connect import SnowflakeConnection
 from utils.snowchat_ui import StreamlitUICallbackHandler, message_func
 from utils.snowddl import Snowddl
+from utils.snow_connect import SnowflakeConnection  # Ensure Snowflake connection is imported
 
 warnings.filterwarnings("ignore")
 chat_history = []
@@ -202,4 +202,3 @@ if (
     #     df = execute_sql(get_sql(result), conn)
     #     if df is not None:
     #         callback_handler.display_dataframe(df)
-    #         append_message(df, "data", True)

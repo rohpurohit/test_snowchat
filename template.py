@@ -70,10 +70,4 @@ Answer:
 
 CONDENSE_QUESTION_PROMPT = ChatPromptTemplate.from_template(template)
 
-# QA_PROMPT = PromptTemplate(template=TEMPLATE, input_variables=["question", "context"])
-# LLAMA_PROMPT = PromptTemplate(
-#     template=LLAMA_TEMPLATE, input_variables=["question", "context"]
-# )
-
-
 QA_PROMPT = ChatPromptTemplate.from_template(TEMPLATE)
