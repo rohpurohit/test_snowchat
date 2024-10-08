@@ -46,25 +46,25 @@ class ModelWrapper:
                 "model_name": "gpt-4o-mini",
                 "api_key": self.secrets["OPENAI_API_KEY"],
             },
-            "gemma2-9b": {
-                "model_name": "gemma2-9b-it",
-                "api_key": self.secrets["GROQ_API_KEY"],
-                "base_url": "https://api.groq.com/openai/v1",
-            },
-            "claude3-haiku": {
-                "model_name": "claude-3-haiku-20240307",
-                "api_key": self.secrets["ANTHROPIC_API_KEY"],
-            },
-            "mixtral-8x22b": {
-                "model_name": "accounts/fireworks/models/mixtral-8x22b-instruct",
-                "api_key": self.secrets["FIREWORKS_API_KEY"],
-                "base_url": "https://api.fireworks.ai/inference/v1",
-            },
-            "llama-3.1-405b": {
-                "model_name": "accounts/fireworks/models/llama-v3p1-405b-instruct",
-                "api_key": self.secrets["FIREWORKS_API_KEY"],
-                "base_url": "https://api.fireworks.ai/inference/v1",
-            },
+            # "gemma2-9b": {
+            #     "model_name": "gemma2-9b-it",
+            #     "api_key": self.secrets["GROQ_API_KEY"],
+            #     "base_url": "https://api.groq.com/openai/v1",
+            # },
+            # "claude3-haiku": {
+            #     "model_name": "claude-3-haiku-20240307",
+            #     "api_key": self.secrets["ANTHROPIC_API_KEY"],
+            # },
+            # "mixtral-8x22b": {
+            #     "model_name": "accounts/fireworks/models/mixtral-8x22b-instruct",
+            #     "api_key": self.secrets["FIREWORKS_API_KEY"],
+            #     "base_url": "https://api.fireworks.ai/inference/v1",
+            # },
+            # "llama-3.1-405b": {
+            #     "model_name": "accounts/fireworks/models/llama-v3p1-405b-instruct",
+            #     "api_key": self.secrets["FIREWORKS_API_KEY"],
+            #     "base_url": "https://api.fireworks.ai/inference/v1",
+            # },
         }
 
         config = model_config[self.model_type]

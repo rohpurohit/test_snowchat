@@ -6,7 +6,7 @@ from snowflake.snowpark.exceptions import SnowparkSQLException
 
 from chain import load_chain
 
-# from utils.snow_connect import SnowflakeConnection
+from utils.snow_connect import SnowflakeConnection
 from utils.snowchat_ui import StreamlitUICallbackHandler, message_func
 from utils.snowddl import Snowddl
 
@@ -191,15 +191,18 @@ if (
         )
         append_message(result.content)
 
-if (
-    st.session_state["model"] == "Mixtral 8x7B"
-    and st.session_state["messages"][-1]["content"] == ""
-):
-    st.session_state["rate-limit"] = True
+# if (
+#     # st.session_state["model"] == "Mixtral 8x7B" and
+#     st.session_state["messages"][-1]["content"]
+# ):
+#     st.session_state["rate-limit"] = True
 
-    # if get_sql(result):
-    #     conn = SnowflakeConnection().get_session()
-    #     df = execute_sql(get_sql(result), conn)
-    #     if df is not None:
-    #         callback_handler.display_dataframe(df)
-    #         append_message(df, "data", True)
+    # if result:
+        # if get_sql(result):
+sql_query = "select * from customer_details"
+print("\n\n\n : sql", sql_query)
+conn = SnowflakeConnection().get_session()
+df = execute_sql(sql_query, conn)
+if df is not None:
+    callback_handler.display_dataframe(df)
+    append_message(df, "data", True)

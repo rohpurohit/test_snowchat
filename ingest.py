@@ -1,10 +1,13 @@
 from typing import Any, Dict
+import nltk
+nltk.download('punkt_tab')
+nltk.download('averaged_perceptron_tagger_eng')
 
 import streamlit as st
 from langchain.document_loaders import DirectoryLoader
-from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
-from langchain.vectorstores import SupabaseVectorStore
+from langchain_community.vectorstores import SupabaseVectorStore
 from pydantic import BaseModel
 from supabase.client import Client, create_client
 
