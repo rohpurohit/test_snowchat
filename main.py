@@ -199,10 +199,40 @@ if (
 
     # if result:
         # if get_sql(result):
-sql_query = "select * from customer_details"
+sql_query = "select * from CUSTOMER_DETAILS"
 print("\n\n\n : sql", sql_query)
 conn = SnowflakeConnection().get_session()
+
+query = """
+create or replace TABLE CUSTOMER_DETAILS (
+	CUSTOMER_ID NUMBER(38,0) NOT NULL,
+	FIRST_NAME VARCHAR(255),
+	LAST_NAME VARCHAR(255),
+	EMAIL VARCHAR(255),
+	PHONE VARCHAR(20),
+	ADDRESS VARCHAR(255),
+	primary key (CUSTOMER_ID)
+);
+
+INSERT INTO CUSTOMER_DETAILS (CUSTOMER_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE, ADDRESS) VALUES
+    (1, 'John', 'Doe', 'john.doe@example.com', '123-456-7890', '123 Elm St, Springfield, USA'),
+    (2, 'Jane', 'Smith', 'jane.smith@example.com', '987-654-3210', '456 Oak St, Portland, USA'),
+    (3, 'Michael', 'Johnson', 'michael.johnson@example.com', '555-678-1234', '789 Maple St, Seattle, USA'),
+    (4, 'Emily', 'Davis', 'emily.davis@example.com', '444-234-5678', '321 Pine St, Austin, USA'),
+    (5, 'David', 'Brown', 'david.brown@example.com', '333-876-5432', '654 Cedar St, Boston, USA'),
+    (6, 'Linda', 'Miller', 'linda.miller@example.com', '222-345-6789', '987 Birch St, Miami, USA'),
+    (7, 'James', 'Wilson', 'james.wilson@example.com', '777-987-6543', '159 Aspen St, Denver, USA'),
+    (8, 'Susan', 'Moore', 'susan.moore@example.com', '666-543-9876', '753 Willow St, Phoenix, USA'),
+    (9, 'Robert', 'Taylor', 'robert.taylor@example.com', '111-234-5678', '852 Redwood St, San Diego, USA'),
+    (10, 'Patricia', 'Anderson', 'patricia.anderson@example.com', '888-765-4321', '963 Dogwood St, Dallas, USA');
+
+"""
+
+conn.sql(query)
+conn.commit()
+
 df = execute_sql(sql_query, conn)
+print("df :", df)
 if df is not None:
     callback_handler.display_dataframe(df)
     append_message(df, "data", True)

@@ -40,6 +40,8 @@ class SnowflakeConnection:
             "authenticator": "oauth",
             "token": SnowflakeConnection._read_oauth_token(),
         }
+        print("\n\n\n\n connection_parameters :\n")
+        print(connection_parameters)
         return connection_parameters
 
     @staticmethod
