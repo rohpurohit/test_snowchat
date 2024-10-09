@@ -3,12 +3,11 @@ from typing import Any, Dict
 import streamlit as st
 from snowflake.snowpark.session import Session
 from snowflake.snowpark.version import VERSION
-import os
 
 
 class SnowflakeConnection:
     """
-    This class is used to establish a connection to Snowflake using OAuth.
+    This class is used to establish a connection to Snowflake.
 
     Attributes
     ----------
@@ -20,7 +19,7 @@ class SnowflakeConnection:
     Methods
     -------
     get_session()
-        Establishes and returns the Snowflake connection session using OAuth.
+        Establishes and returns the Snowflake connection session.
 
     """
 
@@ -31,34 +30,19 @@ class SnowflakeConnection:
     @staticmethod
     def _get_connection_parameters_from_env() -> Dict[str, Any]:
         connection_parameters = {
-            "host": os.getenv("SNOWFLAKE_HOST"),
-            "account": os.getenv("SNOWFLAKE_ACCOUNT"),
-            "database": os.getenv("SNOWFLAKE_DATABASE"),
-            "warehouse": os.getenv("SNOWFLAKE_WAREHOUSE"),
-            "schema": os.getenv("SNOWFLAKE_SCHEMA"),
-            "role": os.getenv("SNOWFLAKE_ROLE"),
-            "authenticator": "oauth",
-            "token": SnowflakeConnection._read_oauth_token(),
+            "account": st.secrets["ACCOUNT"],
+            "user": st.secrets["USER_NAME"],
+            "password": st.secrets["PASSWORD"],
+            "warehouse": st.secrets["WAREHOUSE"],
+            "database": st.secrets["DATABASE"],
+            "schema": st.secrets["SCHEMA"],
+            "role": st.secrets["ROLE"],
         }
-        print("\n\n\n\n connection_parameters :\n")
-        print(connection_parameters)
         return connection_parameters
-
-    @staticmethod
-    def _read_oauth_token() -> str:
-        """
-        Reads the OAuth token from the specified file path.
-        Returns:
-            token: OAuth token as a string.
-        """
-        token_path = "/snowflake/session/token"
-        with open(token_path, "r") as file:
-            token = file.read().strip()
-        return token
 
     def get_session(self):
         """
-        Establishes and returns the Snowflake connection session using OAuth.
+        Establishes and returns the Snowflake connection session.
         Returns:
             session: Snowflake connection session.
         """
