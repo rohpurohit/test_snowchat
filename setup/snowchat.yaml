@@ -1,0 +1,18 @@
+spec:
+  containers:
+    - name: snowchat
+      image: /spcs_app/napp/img_repo/snowchat:latest
+      # resources:
+      #   requests:
+      #     memory: 3G
+      #     cpu: 1
+      #   limits:
+      #     memory: 5G
+  endpoints:
+    - name: snowchat
+      port: 8501
+      public: true
+serviceRoles: # Optional list of service roles
+- name: sfn_service_role
+  endpoints:
+    - snowchat

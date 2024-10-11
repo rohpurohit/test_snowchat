@@ -1,0 +1,8 @@
+{{{ diff }}}
+
+Replace the existing authentication mechanism with the following: 'host', 'account', 'database', 'warehouse',
+ 'role', and 'token' entries. Remove the 'user' and 'password' entries if defined. 
+ Read all values from env except 'authentication' where value should be 'ouath'. 
+ Incorporate a new method to read the OAuth token by reading the file with path:
+  '/snowflake/session/token'. Always ensure that you read the token first before we create a session.
+   Strictly do not make change which is not related to snowflake";
