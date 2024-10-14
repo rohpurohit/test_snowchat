@@ -13,6 +13,6 @@ spec:
       port: 8501
       public: true
 serviceRoles: # Optional list of service roles
-- name: sfn_service_role
-  endpoints:
-    - snowchat
+  - name: sfn_service_role
+    endpoints:
+      - snowchat

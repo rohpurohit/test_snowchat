@@ -112,9 +112,7 @@ CREATE OR REPLACE PROCEDURE v1.GET_CONFIGURATION_FOR_REFERENCE(ref_name STRING) 
                         "host_ports": [
                             "0.0.0.0:80",
                             "0.0.0.0:443",
-                            "api.openai.com:443",
-                            "smtp.gmail.com",
-                            "app-testing.stepfunction.ai:443"
+                            "api.openai.com:443"
                         ],
                         "allowed_secrets": "NONE",
                         "secret_references": []

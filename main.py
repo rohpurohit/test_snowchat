@@ -199,12 +199,12 @@ if (
 
     # if result:
         # if get_sql(result):
-sql_query = "select * from CUSTOMER_DETAILS"
+sql_query = "select * from core.CUSTOMER_DETAILS"
 print("\n\n\n : sql", sql_query)
 conn = SnowflakeConnection().get_session()
 
 query = """
-create or replace TABLE CUSTOMER_DETAILS (
+create or replace TABLE core.CUSTOMER_DETAILS (
 	CUSTOMER_ID NUMBER(38,0) NOT NULL,
 	FIRST_NAME VARCHAR(255),
 	LAST_NAME VARCHAR(255),
@@ -213,8 +213,10 @@ create or replace TABLE CUSTOMER_DETAILS (
 	ADDRESS VARCHAR(255),
 	primary key (CUSTOMER_ID)
 );
-
-INSERT INTO CUSTOMER_DETAILS (CUSTOMER_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE, ADDRESS) VALUES
+"""
+conn.sql(query).collect()
+query = """
+INSERT INTO core.CUSTOMER_DETAILS (CUSTOMER_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE, ADDRESS) VALUES
     (1, 'John', 'Doe', 'john.doe@example.com', '123-456-7890', '123 Elm St, Springfield, USA'),
     (2, 'Jane', 'Smith', 'jane.smith@example.com', '987-654-3210', '456 Oak St, Portland, USA'),
     (3, 'Michael', 'Johnson', 'michael.johnson@example.com', '555-678-1234', '789 Maple St, Seattle, USA'),
@@ -227,9 +229,8 @@ INSERT INTO CUSTOMER_DETAILS (CUSTOMER_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE, 
     (10, 'Patricia', 'Anderson', 'patricia.anderson@example.com', '888-765-4321', '963 Dogwood St, Dallas, USA');
 
 """
-
-conn.sql(query)
-conn.commit()
+conn.sql(query).collect()
+# conn.commit()
 
 df = execute_sql(sql_query, conn)
 print("df :", df)
